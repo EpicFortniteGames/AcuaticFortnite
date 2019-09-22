@@ -47,9 +47,8 @@ public class SpawnEnemiesLite : MonoBehaviour {
 				enemyIndex = Random.Range(0,(enemies.Length));
 				enemyPosition = new Vector3(enemyPosX, pos.y, 0.0f);
 				clone = (GameObject)Instantiate (enemies[enemyIndex], enemyPosition, Quaternion.identity);
-				DestroyObject(clone,5);
-				if(Random.value > 0.5 && clone.GetComponent<AudioSource>())
-					clone.GetComponent<AudioSource>().Play ();
+				/*if(Random.value > 0.5 && clone.GetComponent<AudioSource>())
+					clone.GetComponent<AudioSource>().Play ();*/
 			}		
 		}	
 	}
