@@ -15,18 +15,24 @@ public class PlayerMovement : MonoBehaviour {
 	public int score;
     private bool invincible;
     private float invtime;
+    private Animator explosion;
+    public AudioClip explodeAudio;
+    public int last_score;
 	
 	void Start () {
 		lives = 3;
 		score = 0;
         invincible = false;
+        explosion = GetComponent<Animator>();
+        print(explosion);
+        explosion.SetBool("is_exploding",false);
     }
     void Update()
     {
         if (invincible == true)
         {
             StartCoroutine(Immortal());
-            if (Time.time > invtime + 3f)
+            if (Time.time > invtime + 1.5f)
             {
                 invincible = false;
             }
@@ -52,6 +58,12 @@ public class PlayerMovement : MonoBehaviour {
             nextFire = Time.time + fireRate;
             fire();
         }
+        if(last_score < score){
+            GetComponent<AudioSource>().Stop();
+			GetComponent<AudioSource>().clip = explodeAudio;
+			GetComponent<AudioSource>().Play();
+            last_score = score;
+        }
     }
 
 	void fire(){
@@ -60,10 +72,8 @@ public class PlayerMovement : MonoBehaviour {
 		clone = (GameObject)Instantiate (balita, balitaPosVector, Quaternion.identity);
 	}
 
-    IEnumerator Immortal() // Hacer que parpadee
-    {
-        while (invincible == true)
-        {
+    IEnumerator Immortal(){ // Hacer que parpadee
+        while (invincible == true && lives > 0){
             GetComponent<SpriteRenderer>().enabled = false;
             yield return new WaitForSeconds(.1f);
             GetComponent<SpriteRenderer>().enabled = true;
@@ -72,22 +82,27 @@ public class PlayerMovement : MonoBehaviour {
     }
 
 	void OnCollisionEnter2D(Collision2D collider){
-        if (collider.gameObject.tag == "Enemy")
-        {
-            if (invincible == false)
-            {
+        if (collider.gameObject.tag == "Enemy"){
+            if (invincible == false){
                 lives--;
                 invincible = true;
                 invtime = Time.time;
             }
             Destroy(collider.gameObject);
-            if (lives == 0)
-            {
+            if (lives == 0){
+                GetComponent<AudioSource>().Stop();
+			    GetComponent<AudioSource>().clip = explodeAudio;
+			    GetComponent<AudioSource>().Play();
+                explosion.SetBool("is_exploding", true);
                 print("Your score is:" + score);
-                Destroy(gameObject);
+                
             }
             //GetComponent<Collider>().enabled = false;
         }
 	}
+
+    public void explode_boat(){
+        Destroy(gameObject);
+    }
 }
 
