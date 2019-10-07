@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\FloatPlayer.cs" />
      <Compile Include="Assets\Scripts\FollowCamera.cs" />
      <Compile Include="Assets\Scripts\IgnoreCol.cs" />
+     <Compile Include="Assets\Scripts\menu.cs" />
      <Compile Include="Assets\Scripts\MoveBackground.cs" />
      <Compile Include="Assets\Scripts\MoveCamera_old.cs" />
      <Compile Include="Assets\Scripts\PlayerDead.cs" />

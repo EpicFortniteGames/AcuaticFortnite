@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/menu.unity
+    guid: 64abaa245474a06498f702e4e7722838
+  - enabled: 1
+    path: Assets/Scenes/Barquito.unity
+    guid: 4cf75f9438cb9fc4496342f7a474c93f
   m_configObjects: {}
