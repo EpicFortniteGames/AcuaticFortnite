@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+
 
 public class PlayerMovement : MonoBehaviour {
 	private float velocityX;
@@ -11,8 +13,16 @@ public class PlayerMovement : MonoBehaviour {
 	public float spawny = 0.25f;
 	public float fireRate = 1f;
 	float nextFire = 0.0f;
+
 	public int lives;
 	public int score;
+    public Text scoreText;
+    public Text scoreFinal;
+    public Text scoreFinal2;
+
+
+
+
     private bool invincible;
     private float invtime;
     private Animator explosion;
@@ -59,6 +69,7 @@ public class PlayerMovement : MonoBehaviour {
             fire();
         }
         if(last_score < score){
+            scoreText.text = "Score: " + score;
             GetComponent<AudioSource>().Stop();
 			GetComponent<AudioSource>().clip = explodeAudio;
 			GetComponent<AudioSource>().Play();
@@ -95,7 +106,12 @@ public class PlayerMovement : MonoBehaviour {
 			    GetComponent<AudioSource>().Play();
                 explosion.SetBool("is_exploding", true);
                 print("Your score is:" + score);
-                
+                scoreText.text = "";
+                scoreFinal.text = "Your score is: \n";
+                scoreFinal2.text = "" + score;
+
+
+
             }
             //GetComponent<Collider>().enabled = false;
         }
