@@ -13,16 +13,11 @@ public class PlayerMovement : MonoBehaviour {
 	public float spawny = 0.25f;
 	public float fireRate = 1f;
 	float nextFire = 0.0f;
-
 	public int lives;
 	public int score;
     public Text scoreText;
     public Text scoreFinal;
     public Text scoreFinal2;
-
-
-
-
     private bool invincible;
     private float invtime;
     private Animator explosion;
@@ -37,34 +32,27 @@ public class PlayerMovement : MonoBehaviour {
         print(explosion);
         explosion.SetBool("is_exploding",false);
     }
-    void Update()
-    {
-        if (invincible == true)
-        {
+    void Update(){
+        if (invincible == true){
             StartCoroutine(Immortal());
-            if (Time.time > invtime + 1.5f)
-            {
+            if (Time.time > invtime + 1.5f){
                 invincible = false;
             }
         }
         velocityX = 0f;
-        if (Input.GetKey("right"))
-        {
+        if (Input.GetKey("right")){
             velocityX = speed;
 
         }
-        if (Input.GetKey("left"))
-        {
+        if (Input.GetKey("left")){
             velocityX = -speed;
         }
 
-        if (GetComponent<Rigidbody2D>())
-        {
+        if (GetComponent<Rigidbody2D>()){
             GetComponent<Rigidbody2D>().velocity = new Vector2(velocityX, 0);
         }
 
-        if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
-        {
+        if (Input.GetButtonDown("Fire1") && Time.time > nextFire){
             nextFire = Time.time + fireRate;
             fire();
         }
@@ -109,11 +97,7 @@ public class PlayerMovement : MonoBehaviour {
                 scoreText.text = "";
                 scoreFinal.text = "Your score is: \n";
                 scoreFinal2.text = "" + score;
-
-
-
             }
-            //GetComponent<Collider>().enabled = false;
         }
 	}
 
