@@ -7,6 +7,8 @@ TagManager:
   - Wall
   - Enemy
   - balita
+  - button
+  - button2
   layers:
   - Default
   - TransparentFX
